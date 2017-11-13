@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>UN-mapita</title>
+		<link rel="stylesheet" href="dist/semantic-ui/semantic.css" type="text/css" />
+		<link rel="stylesheet" href="css/index.css" type="text/css" />
+	</head>
+	<body>
+		<div class="ui grid content">
+			<div class="five wide column sidebar">
+				<div class="ui left fixed vertical menu">
+				  <div class="item">
+				    <img class="ui small image" src="https://www.uninorte.edu.co/image/image_gallery?uuid=ecc526b3-d293-452b-a85c-541b05605eb6&groupId=10698&t=1426795150234">
+				  </div>
+				  <a class="item">Features</a>
+				  <a class="item">Testimonials</a>
+				  <a class="item">Sign-in</a>
+				</div>
+			</div>
+			<div id="map-container" class="eleven wide column map">
+				<div id="mapita"></div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="dist/semantic-ui/semantic.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVPYT3JpzMwyb_urQDjQz1o_jTK1Pgp7U&callback=initMap"></script>
+	</body>
+</html>
