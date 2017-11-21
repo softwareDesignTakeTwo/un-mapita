@@ -1,0 +1,29 @@
+{
+  "name": "material-modal",
+  "version": "0.1.3",
+  "description": "A modal dialog for use with Material Design Lite",
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarkRabey/material-modal"
+  },
+  "bugs": {
+    "url": "https://github.com/MarkRabey/material-modal/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Rabey <mark@markrabey.com> (markrabey.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "jshint-stylish": "^2.2.1",
+    "less-plugin-autoprefix": "^1.5.1",
+    "load-grunt-tasks": "^3.3.0",
+    "time-grunt": "^1.2.2"
+  }
+}
