@@ -13,15 +13,3 @@ function databaseSetUp() {
 function retrieve(url, database) {
   return database.ref(url).once('value');
 }
-
-function addPlace(name, latLng, category, info, database) {
-  var latLng = JSON.stringify(latLng);
-  var newPlace = database.ref('lugares').push().key;
-  database.ref('lugares/' + newPlace).set({
-      name: name,
-      category: category,
-      latLng: latLng,
-      info: info
-  });
-  //database.ref('lista-lugares').set(['prueba']);
-}

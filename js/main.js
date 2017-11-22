@@ -8,6 +8,12 @@ databaseSetUp();
 var database = firebase.database();
 var auth = firebase.auth();
 
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        window.location.pathname = "/dashboard.html";
+    }
+});
+
 function login() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
@@ -17,7 +23,6 @@ function login() {
       var errorMessage = error.message;
       console.log(errorCode);
       console.log(errorMessage);
-      // ...
     });
 }
 
