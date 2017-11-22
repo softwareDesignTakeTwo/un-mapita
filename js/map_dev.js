@@ -12,7 +12,14 @@ function initMap() {
         scaleControl: true,
         streetViewControl: true
     });
-    
+    map.addListener('click', function(event) {
+        
+        var marker = addMarker(event.latLng);
+        marker.addListener('click', function() {
+            map.setZoom(20);
+            map.setCenter(marker.getPosition());
+        });
+    });
     var centerControlDiv = document.createElement('div');
     var centerControl = new CenterControl(centerControlDiv, map);
     centerControlDiv.index = 1;
@@ -21,6 +28,13 @@ function initMap() {
 // End Map set-up
 
 // Added helpful methods
+function addMarker(location) {
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+    return marker;
+}
 
 function makeInfoBox(controlDiv, map) {
     // Set CSS for the control border.

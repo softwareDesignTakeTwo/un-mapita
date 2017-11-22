@@ -17,6 +17,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 function login() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+    document.getElementById('email').value = ""; 
+    document.getElementById('email').value = ""
     auth.signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -25,6 +27,8 @@ function login() {
       console.log(errorMessage);
     });
 }
+
+
 
 retrieve('places', database).then(function(snapshot){
     places = snapshot.val();
