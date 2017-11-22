@@ -13,6 +13,7 @@ function initMap() {
         streetViewControl: true
     });
     map.addListener('click', function(event) {
+        
         var marker = addMarker(event.latLng);
         marker.addListener('click', function() {
             map.setZoom(20);
