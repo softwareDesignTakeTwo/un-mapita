@@ -24,6 +24,13 @@ function addPlace(name, latLng, category, database) {
   });
 }
 
+function addCategory(name, icon, database) {
+  database.ref('categories/' + name).set({
+      icon: icon
+  });
+}
+
+
 function login() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;

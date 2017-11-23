@@ -1,4 +1,4 @@
-
+var marker;
 // Map set-up
 var uninorte = {lat: 11.019102, lng: -74.850524}; //considerar poner esto en Firebase
 var map;
@@ -14,12 +14,14 @@ function initMap() {
         streetViewControl: true
     });
     map.addListener('click', function(event) {
-        document.getElementById("latLng").innerHTML += JSON.stringify(event.latLng);
+        if (marker != null || marker != undefined) {
+           marker.setMap(null); 
+        }
+        document.getElementById("latLng").innerHTML = "Posicion: " + JSON.stringify(event.latLng);
         currentLatLong = event.latLng;
-        var marker = addMarker(event.latLng);
-        marker.addListener('click', function() {
-            map.setZoom(20);
-            map.setCenter(marker.getPosition());
+        marker = new google.maps.Marker({
+          position: currentLatLong,
+          map: map
         });
     });
     var centerControlDiv = document.createElement('div');
@@ -29,14 +31,58 @@ function initMap() {
 }
 // End Map set-up
 
+
+function updateCategories() {
+    retrieve('categories', database).then(function(snapshot){
+        categories = snapshot.val();
+        var cat = document.getElementById("categoria");
+        var length = cat.options.length;
+        for (i = 0; i < length; i++) {
+            cat.options[i] = null;
+        }
+        for (x in snapshot.val()) {
+            var option = document.createElement("option");
+            option.text = x;
+            cat.add(option);
+        }
+    });
+};
+
+updateCategories();
+
 function savePlace() {
     var nombre = document.getElementById("nombre").value;
-    var categoria = document.getElementById("categoria");
+    var categoria = document.getElementById("categoria").value;
     addPlace(nombre, currentLatLong, categoria, firebase.database());
+    alert("Lugar agregado!");
+    retrieve('places', database).then(function(snapshot){
+        places = snapshot.val();
+        for (x in places) {
+            var icon = {
+                url: categories[places[x].category].icon, // url
+                scaledSize: new google.maps.Size(50, 50), // scaled size
+            };
+            var marker = new google.maps.Marker({
+                position: JSON.parse( places[x].latLng ),
+                label: {text: places[x].name, color: "white"},
+                icon: icon,
+                map: map
+            });
+        };
+    });
+    document.getElementById("nombre").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("latLng").innerHTML = "Posicion:";
 }
 
 function saveCategory() {
-    
+    var nombre = document.getElementById("nombre-categoria").value;
+    var icon = document.getElementById("URL").value;
+    addCategory(nombre, icon, database);
+    alert("Categoría agregada");
+    document.getElementById("nombre-categoria").value = "";
+    document.getElementById("URL").value = "";
+    updateCategories();
 }
 
 // Added helpful methods
@@ -46,6 +92,15 @@ function addMarker(location) {
       map: map
     });
     return marker;
+}
+
+function signOut() {
+    auth.signOut().then(function() {
+        window.location.pathname = "/index.html";
+    }).catch(function(error) {
+        alert(JSON.stringify(error));
+        window.location.pathname = "/index.html";
+    });
 }
 
 function makeInfoBox(controlDiv, map) {
