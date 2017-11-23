@@ -1,4 +1,3 @@
-
 // Map set-up
 var uninorte = {lat: 11.019102, lng: -74.850524}; //considerar poner esto en Firebase
 var map;
@@ -12,7 +11,6 @@ function initMap() {
         scaleControl: true,
         streetViewControl: true
     });
-    
     var centerControlDiv = document.createElement('div');
     var centerControl = new CenterControl(centerControlDiv, map);
     centerControlDiv.index = 1;
