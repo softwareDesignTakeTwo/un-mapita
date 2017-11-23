@@ -2,6 +2,7 @@
 // Map set-up
 var uninorte = {lat: 11.019102, lng: -74.850524}; //considerar poner esto en Firebase
 var map;
+var currentLatLong;
 function initMap() {
     map = new google.maps.Map(document.getElementById("mapita"), {
         zoom: 18,
@@ -13,7 +14,8 @@ function initMap() {
         streetViewControl: true
     });
     map.addListener('click', function(event) {
-        
+        document.getElementById("latLng").innerHTML += JSON.stringify(event.latLng);
+        currentLatLong = event.latLng;
         var marker = addMarker(event.latLng);
         marker.addListener('click', function() {
             map.setZoom(20);
@@ -26,6 +28,16 @@ function initMap() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 }
 // End Map set-up
+
+function savePlace() {
+    var nombre = document.getElementById("nombre").value;
+    var categoria = document.getElementById("categoria");
+    addPlace(nombre, currentLatLong, categoria, firebase.database());
+}
+
+function saveCategory() {
+    
+}
 
 // Added helpful methods
 function addMarker(location) {

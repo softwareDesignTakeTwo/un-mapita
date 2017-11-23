@@ -9,3 +9,9 @@ html, body {
 .logo {
     width: 80%;
 }
+form {
+    margin-left: 10%;
+}
+p {
+    font-family: 'Roboto', sans-serif;
+}
